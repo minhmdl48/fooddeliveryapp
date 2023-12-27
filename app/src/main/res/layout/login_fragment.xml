@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.LoginFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/top_drawer"
+        android:layout_width="318dp"
+        android:layout_height="253dp"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/illustration_top_drawer_login" />
+
+    <TextView
+        android:id="@+id/sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_drawer"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="30dp"
+        android:text="Đăng nhập"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        android:fontFamily="@font/nbold" />
+
+    <LinearLayout
+        android:id="@+id/kotak"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_below="@id/sign_in">
+
+
+        <EditText
+            android:fontFamily="@font/nmedium"
+            android:id="@+id/login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_account_copper"
+            android:drawablePadding="15dp"
+            android:ems="10"
+            android:hint="Tên đăng nhập"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:fontFamily="@font/nmedium"
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_password_copper"
+            android:hint="Mật khẩu"
+            android:drawablePadding="15dp"
+            android:ems="10"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/login_button_login"
+        style="@style/ButtonCoklat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/kotak"
+        android:textSize="18dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Đăng nhâp" />
+
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/login_forgot_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_button_login"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="10dp"
+        android:gravity="right"
+        android:text="Quên mật khẩu? "
+        android:textColor="@color/starbucks_black" />
+
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/login_button_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="30dp"
+        android:gravity="center"
+        android:text="@string/login_no_account" />
+
+</RelativeLayout>
