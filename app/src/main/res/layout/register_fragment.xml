@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.RegisterFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/register_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="75dp"
+        android:fontFamily="@font/nbold"
+        android:gravity="center"
+        android:text="Tạo tài khoản mới"
+        android:textColor="@color/black"
+        android:textSize="35dp" />
+
+
+
+    <LinearLayout
+        android:id="@+id/register_linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_title"
+        android:layout_marginVertical="40dp"
+        android:layout_marginHorizontal="30dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:fontFamily="@font/nmedium"
+            android:id="@+id/register_full_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:drawableLeft="@drawable/ic_account_copper"
+            android:drawablePadding="15dp"
+            android:ems="10"
+            android:hint="Họ tên"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:fontFamily="@font/nmedium"
+            android:id="@+id/register_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:drawableLeft="@drawable/ic_account_copper"
+            android:drawablePadding="15dp"
+            android:ems="10"
+            android:hint="Tên đăng nhập "
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:fontFamily="@font/nmedium"
+            android:id="@+id/register_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:drawableLeft="@drawable/ic_account_copper"
+            android:drawablePadding="15dp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:fontFamily="@font/nmedium"
+            android:id="@+id/register_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:drawableLeft="@drawable/ic_account_copper"
+            android:drawablePadding="15dp"
+            android:ems="10"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/register_button_register"
+        style="@style/ButtonCoklat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_linear1"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="15dp"
+        android:textSize="17dp"
+        android:text="đăng ký" />
+
+</RelativeLayout>

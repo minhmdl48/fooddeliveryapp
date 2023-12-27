@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="barn_red">#6F1A07</color>
+    <color name="starbucks_black">#000057</color>
+    <color name="starbucks_green">#00704A</color>
+    <color name="underline">#C6C6C8</color>
 </resources>
