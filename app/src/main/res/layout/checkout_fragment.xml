@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="40sp"
         android:layout_alignParentTop="true"
-
         android:background="@color/white"
         app:navigationIcon="@drawable/ic_arow_back_left" />
 
@@ -28,7 +27,6 @@
         android:backgroundTint="@color/white" />
 
     <TextView
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/checkout_back_button"
@@ -94,7 +92,6 @@
             android:text="141 Chien Thang Street, Ha Noi"
             android:lines="2"
             android:textColor="@color/starbucks_black" />
-
     </LinearLayout>
 
     <View

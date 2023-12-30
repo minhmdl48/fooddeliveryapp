@@ -3,4 +3,6 @@
     <string name="login_no_account">
         Chưa có tài khoản? <font color="#000057"><b>Đăng ký ngay</b></font>
     </string>
+    <string name="login_title">Đăng nhập</string>
+    <string name="currency_symbol">đ</string>
 </resources>
