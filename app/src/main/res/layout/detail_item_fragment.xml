@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FBFBFB"
+    tools:context=".fragment.DetailItemFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/detail_back_button"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0sp"
+        app:navigationIcon="@drawable/ic_arow_back_left" />
+
+    <ImageView
+        android:id="@+id/detail_img"
+        android:layout_width="match_parent"
+        android:layout_height="430sp"
+        android:layout_below="@+id/detail_back_button"
+        android:scaleType="fitXY"
+        android:src="@mipmap/cafesuada" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="456dp"
+            android:background="@drawable/roundstyle"
+            android:backgroundTint="@color/white" />
+
+        <TextView
+            android:id="@+id/detail_itemname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="465sp"
+            android:fontFamily="@font/nbold"
+            android:gravity="top"
+            android:lineSpacingExtra="-2sp"
+            android:text="Cà phê sữa đá"
+            android:textColor="#000000"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/detail_price"
+            android:layout_width="138dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="500sp"
+            android:fontFamily="@font/nbold"
+            android:gravity="top"
+            android:lineSpacingExtra="-2sp"
+            android:text="đ29.000"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/des"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginLeft="19dp"
+            android:layout_marginTop="550sp"
+            android:fontFamily="@font/nbold"
+            android:gravity="top"
+            android:lineSpacingExtra="-2sp"
+            android:text="Mô tả sản phẩm "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/detail_desc"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="590sp"
+            android:fontFamily="@font/nmedium"
+            android:gravity="top"
+            android:lineSpacingExtra="-2sp"
+            android:text="Cà phê Đắk Lắk nguyên chất được pha phin truyền thống kết hợp với sữa đặc tạo nên hương vị đậm đà, hài hòa giữa vị ngọt đầu lưỡi và vị đắng thanh thoát nơi hậu vị."
+            android:textColor="@color/starbucks_black"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/detail_addbutton"
+            android:layout_width="325dp"
+            android:layout_height="53dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="655sp"
+            android:backgroundTint="@color/starbucks_green"
+            android:fontFamily="@font/nbold"
+            android:text="Thêm vào giỏ hàng"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+    </FrameLayout>
+</RelativeLayout>
