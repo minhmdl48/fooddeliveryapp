@@ -5,4 +5,5 @@
     </string>
     <string name="login_title">Đăng nhập</string>
     <string name="currency_symbol">đ</string>
+    <string name="item_price">đ %1$s</string>
 </resources>

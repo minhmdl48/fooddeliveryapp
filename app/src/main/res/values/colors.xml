@@ -8,7 +8,7 @@
     <color name="underline">#C6C6C8</color>
     <color name="bottom_nav_background">#FFFFFF</color>
     <color name="bottom_nav_item">#AEAEB2</color>
-    <color name="bottom_nav_selected_item">#9E7759</color>
+    <color name="bottom_nav_selected_item">#0f5427</color>
     <color name="fragment_bg_color">#FDF8F4</color>
     <color name="bg_send">#DDF5F4</color>
 </resources>

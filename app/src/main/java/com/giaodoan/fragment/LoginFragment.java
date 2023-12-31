@@ -1,7 +1,10 @@
 package com.giaodoan.fragment;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,8 @@ import androidx.navigation.Navigation;
 import com.giaodoan.Activity.HomePageActivity;
 import com.giaodoan.R;
 import com.giaodoan.databinding.LoginFragmentBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -45,7 +50,20 @@ public class LoginFragment extends Fragment {
         binding.loginButtonRegister.setOnClickListener(v -> Navigation.findNavController(view)
                 .navigate(R.id.action_loginFragment2_to_registerFragment2));
 
-        binding.loginForgotPassword.setOnClickListener(v -> Toast.makeText(requireActivity(), "Tính năng hiện chưa có sẵn...", Toast.LENGTH_SHORT).show());
+        //Xử lý nút Quên mật khẩu
+        binding.loginForgotPassword.setOnClickListener(v -> {
+            String mail= binding.loginEmail.getText().toString().trim();
+            auth.sendPasswordResetEmail(mail)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d("LoginFragment", "Email sent."+mail);
+                                Toast.makeText(requireActivity(), "Đã gửi link đặt lại mật khẩu tại: "+mail, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        });
     }
 
     private void signinUser(String email, String password) {

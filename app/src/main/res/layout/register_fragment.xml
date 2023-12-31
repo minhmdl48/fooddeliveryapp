@@ -61,7 +61,8 @@
             android:drawablePadding="15dp"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            />
 
         <EditText
             android:fontFamily="@font/nmedium"

@@ -8,15 +8,15 @@
     <item
         android:id="@+id/keranjangFragment"
         android:icon="@drawable/ic_cart"
-        android:title="Keranjang" />
+        android:title="Giỏ hàng" />
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="Search" />
+        android:title="Tìm kiếm" />
     <item
         android:id="@+id/pesananFragment"
         android:icon="@drawable/ic_order"
-        android:title="Pesanan" />
+        android:title="Đặt hàng" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_baseline_account_circle_24"

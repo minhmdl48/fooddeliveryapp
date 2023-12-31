@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="8dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/pop_image"
+            android:layout_width="270dp"
+            android:layout_height="270dp"
+            app:riv_corner_radius="8dp"
+            android:scaleType="centerCrop"
+
+            android:src="@mipmap/cafesuada"/>
+        <TextView
+            android:fontFamily="@font/nbold"
+            android:id="@+id/pop_judul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:text="Cà phê sữa đá"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24sp"/>
+
+        <LinearLayout
+            android:layout_marginHorizontal="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+            <TextView
+                android:fontFamily="@font/nmedium"
+                android:id="@+id/pop_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:textColor="@color/black"
+                android:text="đ29000"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:fontFamily="@font/nbold"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="15dp"
+            android:textColor="@color/white"
+            android:text="Thêm vào giỏ hàng"
+            android:textSize="17sp"
+            android:textAllCaps="false"
+
+            android:background="@drawable/roundstyle"
+            android:backgroundTint="@color/starbucks_green"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

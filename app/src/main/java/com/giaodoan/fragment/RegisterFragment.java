@@ -1,6 +1,7 @@
 package com.giaodoan.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,11 +44,13 @@ public class RegisterFragment extends Fragment {
         userDatabaseReference = FirebaseFirestore.getInstance().collection("users");
 
         binding.registerButtonRegister.setOnClickListener(v -> {
-            String email = binding.registerEmail .getText().toString().trim();
+            String email = binding.registerEmail.getText().toString().trim();
+
             String password = binding.registerPassword.getText().toString().trim();
+            Log.d("RegisterFragment", "Password to validate: " + password);
             if (!email.isEmpty() && !password.isEmpty()) {
                 User user = new User(
-                        "",
+                        " ",
                         binding.registerFullName.getText().toString().trim(),
                         binding.registerUsername.getText().toString().trim(),
                         email,
@@ -69,7 +72,11 @@ public class RegisterFragment extends Fragment {
     }
 
     private void registerUser(User user) {
-
+        String pass = user.getPassword();
+        Log.d("RegisterFragment", "pass to validate: "+ pass);
+        String mail= user.getEmail();
+        Log.d("RegisterFragment", "Email to validate: "+ mail);
+        if (isValidEmail(user.getEmail())) {
             auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -78,11 +85,23 @@ public class RegisterFragment extends Fragment {
                             Navigation.findNavController(requireView())
                                     .navigate(R.id.action_registerFragment2_to_loginFragment2);
                         } else {
+                            Log.d("RegisterFragment", "User creation failed: " + task.getException().getMessage());
                             Toast.makeText(requireActivity(), Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+        } else {
+            Toast.makeText(requireActivity(), "The email address is bad", Toast.LENGTH_SHORT).show();
         }
     }
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^\\S+@\\S+\\.\\S+$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+}
+
 
 
 
