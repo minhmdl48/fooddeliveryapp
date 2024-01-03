@@ -20,9 +20,10 @@
             android:scaleType="centerCrop"
 
             android:src="@mipmap/cafesuada"/>
+
         <TextView
             android:fontFamily="@font/nbold"
-            android:id="@+id/pop_judul"
+            android:id="@+id/pop_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -31,40 +32,16 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="24sp"/>
-
-        <LinearLayout
-            android:layout_marginHorizontal="9dp"
+        <TextView
+            android:fontFamily="@font/nmedium"
+            android:id="@+id/pop_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-
-            <TextView
-                android:fontFamily="@font/nmedium"
-                android:id="@+id/pop_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="right"
-                android:textColor="@color/black"
-                android:text="đ29000"/>
-
-        </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:fontFamily="@font/nbold"
-            android:layout_width="220dp"
-            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginVertical="15dp"
-            android:textColor="@color/white"
-            android:text="Thêm vào giỏ hàng"
-            android:textSize="17sp"
-            android:textAllCaps="false"
+            android:gravity="right"
+            android:textColor="@color/black"
+            android:text="đ29000"/>
 
-            android:background="@drawable/roundstyle"
-            android:backgroundTint="@color/starbucks_green"/>
 
     </LinearLayout>
 

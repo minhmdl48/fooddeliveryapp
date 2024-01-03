@@ -30,10 +30,8 @@ public class HomePageActivity extends AppCompatActivity {
         binding = ActivityHomepageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // AUTH
         auth = FirebaseAuth.getInstance();
 
-        // NAV BAR
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.mainContainer);
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 

@@ -24,7 +24,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         this.onLongClickRemove = onLongClickRemove;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         RvCartBinding binding;
 
         public ViewHolder(RvCartBinding binding) {
@@ -46,7 +46,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         Glide.with(context).load(currentItem.getImg_url()).into(holder.binding.cartImage);
         holder.binding.cartItemName.setText(currentItem.getName());
-        holder.binding.cartItemPrice.setText("Rp " + currentItem.getPrice());
+        holder.binding.cartItemPrice.setText("đ" + currentItem.getPrice());
         holder.binding.cartItemQuantity.setText(String.valueOf(currentItem.getQuantity()));
 
         holder.itemView.setOnLongClickListener(v -> {

@@ -37,7 +37,7 @@ public class ItemsShowAdapter extends RecyclerView.Adapter<ItemsShowAdapter.View
         Item item = list.get(position);
         String image = item.getImageUrl();
 
-        holder.binding.allJudul.setText(item.getName());
+        holder.binding.allTitle.setText(item.getName());
         holder.binding.allPrice.setText(context.getString(R.string.item_price, item.getPrice()));
         Glide.with(context).load(image).into(holder.binding.allImage);
 

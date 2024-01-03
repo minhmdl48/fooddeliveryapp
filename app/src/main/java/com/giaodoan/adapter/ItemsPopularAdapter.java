@@ -2,9 +2,9 @@ package com.giaodoan.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -34,8 +34,9 @@ public class ItemsPopularAdapter extends RecyclerView.Adapter<ItemsPopularAdapte
         }
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         PopularItemBinding binding = PopularItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
@@ -46,16 +47,13 @@ public class ItemsPopularAdapter extends RecyclerView.Adapter<ItemsPopularAdapte
         String image = item.getImageUrl();
 
         Glide.with(context).load(image).into(holder.binding.popImage);
-        holder.binding.popJudul.setText(item.getName());
+        holder.binding.popTitle.setText(item.getName());
         holder.binding.popPrice.setText(context.getString(R.string.item_price, item.getPrice()));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int pos = holder.getAdapterPosition();
-                if (pos != RecyclerView.NO_POSITION) {
-                    productClickInterface.onClickProduct(list.get(pos));
-                }
+        holder.itemView.setOnClickListener(v -> {
+            int pos = holder.getAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION) {
+                productClickInterface.onClickProduct(list.get(pos));
             }
         });
     }

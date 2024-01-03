@@ -1,4 +1,4 @@
 package com.giaodoan.fragment;
+public class CheckoutFragment{
 
-public class CheckoutFragment {
 }

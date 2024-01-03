@@ -48,6 +48,18 @@
             android:text="Cà phê sữa đá"
             android:textColor="#000000"
             android:textSize="22sp" />
+        <TextView
+            android:id="@+id/detail_itemquantity"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="323sp"
+            android:layout_marginTop="465sp"
+            android:textAlignment="center"
+            android:fontFamily="@font/nbold"
+            android:lineSpacingExtra="-2sp"
+            android:text="1"
+            android:textColor="#000000"
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/detail_price"
@@ -67,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginLeft="19dp"
-            android:layout_marginTop="550sp"
+            android:layout_marginTop="540sp"
             android:fontFamily="@font/nbold"
             android:gravity="top"
             android:lineSpacingExtra="-2sp"
@@ -75,31 +87,53 @@
             android:textColor="#000000"
             android:textSize="20sp" />
 
+        <ImageView
+            android:id="@+id/add_item"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="290sp"
+            android:layout_marginTop="465sp"
+            android:background="@drawable/roundstyle"
+            android:backgroundTint="@color/bg_send"
+            android:scaleType="center"
+            android:src="@drawable/add" />
+        <ImageView
+            android:id="@+id/remove_item"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="360sp"
+            android:layout_marginTop="465sp"
+            android:background="@drawable/roundstyle"
+            android:backgroundTint="@color/bg_send"
+            android:scaleType="center"
+            android:src="@drawable/remove" />
         <TextView
             android:id="@+id/detail_desc"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="19dp"
-            android:layout_marginTop="590sp"
+            android:layout_marginTop="575sp"
             android:fontFamily="@font/nmedium"
             android:gravity="top"
             android:lineSpacingExtra="-2sp"
             android:text="Cà phê Đắk Lắk nguyên chất được pha phin truyền thống kết hợp với sữa đặc tạo nên hương vị đậm đà, hài hòa giữa vị ngọt đầu lưỡi và vị đắng thanh thoát nơi hậu vị."
             android:textColor="@color/starbucks_black"
             android:textSize="16sp" />
-
+    </FrameLayout>
         <Button
             android:id="@+id/detail_addbutton"
-            android:layout_width="325dp"
-            android:layout_height="53dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="34dp"
-            android:layout_marginTop="655sp"
+            android:layout_marginTop="659sp"
             android:backgroundTint="@color/starbucks_green"
             android:fontFamily="@font/nbold"
             android:text="Thêm vào giỏ hàng"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
-    </FrameLayout>
+
 </RelativeLayout>

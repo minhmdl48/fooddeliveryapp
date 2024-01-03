@@ -27,7 +27,6 @@ public class RegisterFragment extends Fragment {
     private FirebaseAuth auth;
     private CollectionReference userDatabaseReference;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

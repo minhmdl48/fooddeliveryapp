@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBFBFB"
+    tools:context=".fragment.CartFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/tv_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:fontFamily="@font/nbold"
+        android:gravity="center"
+        android:text="Giỏ hàng"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_carts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tv_total"
+        android:layout_below="@id/tv_cart"
+        android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/tv_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="Tổng cộng"
+        android:layout_above="@id/tv_subtotal"/>
+
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_subtotal"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="right"
+        android:text="đ10000"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/tv_subtotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/nbold"
+        android:textColor="@color/black"
+        android:text="Subtotal"
+        android:layout_above="@id/cart_checkout"/>
+
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/keranjang_subtotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/cart_checkout"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="right"
+        android:text="Rp 0"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/cart_checkout"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="@color/starbucks_green"
+        android:text="Thanh toán"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+
+
+
+</RelativeLayout>

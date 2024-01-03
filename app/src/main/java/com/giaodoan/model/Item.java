@@ -9,7 +9,7 @@ public class Item {
     private String imageUrl;
 
     public Item() {
-        this.id="0";
+        this.id="";
         this.name="";
         this.type="";
         this.description="";

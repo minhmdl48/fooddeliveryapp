@@ -21,8 +21,8 @@
         <TextView
             android:fontFamily="@font/nbold"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="5dp"
-            android:id="@+id/all_judul"
+            android:layout_marginStart="5dp"
+            android:id="@+id/all_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cà phê sữa đá"
@@ -34,19 +34,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:orientation="horizontal">
-
-
-            <TextView
-                android:fontFamily="@font/nmedium"
-                android:id="@+id/all_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:text="4.8"
-                android:textColor="@color/black"
-                />
 
             <TextView
                 android:fontFamily="@font/nmedium"
@@ -55,9 +44,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:layout_margin="3dp"
-                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
                 android:textColor="@color/black"
-                android:text="1000" />
+                android:text="đ29000" />
 
         </LinearLayout>
 
