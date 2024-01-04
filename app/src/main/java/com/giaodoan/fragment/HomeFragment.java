@@ -20,12 +20,6 @@ import com.giaodoan.adapter.SearchAdapter;
 import com.giaodoan.databinding.FragmentHomeBinding;
 import com.giaodoan.model.Item;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -73,8 +67,6 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
         binding.rvAllItem.setAdapter(itemAdapter);
         setItemsData();
 
-
-
         //Implement Popular Items Recycle Items
         LinearLayoutManager productLayoutManagerPop = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         itemAdapter2 = new ItemsPopularAdapter(requireContext(), itemListPopular, this);
@@ -87,13 +79,6 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
                 .navigate(R.id.action_homeFragment_to_searchFragment));
     }
 
-
-
-
-
-
-
-
     private void setItemsData() {
         collectionReference.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -101,9 +86,7 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
                 for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                     Item item = document.toObject(Item.class);
                     itemList.add(item);
-                    Log.d("HomeFragment","itemId: "+item.getId());
-                    Log.d("HomeFragment","name: "+item.getName());
-                    Log.d("HomeFragment","description: "+item.getDescription());
+
                 }
                 itemAdapter.notifyDataSetChanged();
 
@@ -117,11 +100,13 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
     private void setItemsPopular() {
         collectionReference.whereEqualTo("type", "popular").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                itemList.clear();
+                itemListPopular.clear();
                 for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                     Item item = document.toObject(Item.class);
-                    itemList.add(item);
-                    Log.d("HomeFragment","2imageurl: "+item.getImageUrl());
+                    itemListPopular.add(item);
+                    Log.d("HomeFragment", "itemId: " + item.getId());
+                    Log.d("HomeFragment", "name: " + item.getName());
+                    Log.d("HomeFragment", "description: " + item.getDescription());
                 }
                 itemAdapter.notifyDataSetChanged();
             } else {
@@ -129,6 +114,7 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
             }
         });
     }
+
     @Override
     public void onClickProduct(Item item) {
         // Handle the click event here
@@ -139,7 +125,6 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
         // Create a new Bundle to pass the clicked item's ID to the ProductDetailFragment
         Bundle bundle = new Bundle();
         bundle.putString("productId", item.getId());
-        Log.d("HomeFragment","productId: "+item.getId());
 
         // Use Navigation component to navigate to the ProductDetailFragment
         Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailItemFragment2, bundle);

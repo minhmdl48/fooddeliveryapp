@@ -1,6 +1,7 @@
 package com.giaodoan.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,15 @@ import com.giaodoan.R;
 import com.giaodoan.adapter.CartAdapter;
 import com.giaodoan.databinding.CartFragmentBinding;
 import com.giaodoan.model.Cart;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.giaodoan.model.ItemOrder;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -32,29 +36,30 @@ import java.util.Objects;
 public class CartFragment extends Fragment implements CartAdapter.OnLongClickRemove {
 
     private CartFragmentBinding binding;
-    private ArrayList<Cart> cartList;
+    private ArrayList<ItemOrder> cartList;
     private FirebaseAuth auth;
     private CartAdapter adapter;
 
     private int totalPrice = 0;
+    private DatabaseReference cartDatabase= FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("carts");
 
 
     private CollectionReference cartDatabaseReference = FirebaseFirestore.getInstance().collection("carts");
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = CartFragmentBinding.inflate(inflater);
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         binding = CartFragmentBinding.bind(view);
         auth = FirebaseAuth.getInstance();
-        
+
         BottomNavigationView bottomNavigation = requireActivity().findViewById(R.id.bottom_navigationView);
         bottomNavigation.setVisibility(View.VISIBLE);
 
@@ -65,7 +70,9 @@ public class CartFragment extends Fragment implements CartAdapter.OnLongClickRem
 
         adapter = new CartAdapter(requireContext(), cartList, this);
         binding.rvCarts.setAdapter(adapter);
+
         binding.rvCarts.setLayoutManager(layoutManager);
+
 
         binding.cartCheckout.setOnClickListener(v -> {
             if (cartList.isEmpty()) {
@@ -83,59 +90,43 @@ public class CartFragment extends Fragment implements CartAdapter.OnLongClickRem
     }
 
     private void retrieveCartItems() {
-        cartDatabaseReference
-                .whereEqualTo("uid", Objects.requireNonNull(auth.getCurrentUser()).getUid())
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        Cart cartProduct = documentSnapshot.toObject(Cart.class);
+        cartDatabase.child(Objects.requireNonNull(auth.getCurrentUser()).getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            ItemOrder cartProduct = snapshot.getValue(ItemOrder.class);
 
-                        cartList.add(cartProduct);
+                            cartList.add(cartProduct);
+                            totalPrice += Integer.parseInt(Objects.requireNonNull(cartProduct).getPrice());
 
-                        totalPrice += Integer.parseInt(cartProduct.getPrice());
-
-
+                        }
                         adapter.notifyDataSetChanged();
+                        Log.d("CartFragment", "totalPrice: " + totalPrice);
+                        binding.tvTotalPrice.setText("đ"+ totalPrice);
                     }
-                })
-                .addOnFailureListener(e -> Toast.makeText(getContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
-    public void onLongRemove(Cart item, int position) {
-        cartDatabaseReference
-                .whereEqualTo("uid", item.getUid())
-                .whereEqualTo("pid", item.getPid())
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        cartDatabaseReference.document(documentSnapshot.getId()).delete();
-                        cartList.remove(position);
-                        adapter.notifyItemRemoved(position);
-                        Toast.makeText(getContext(), "Berhasil Menghapus", Toast.LENGTH_SHORT).show();
-                    }
+    public void onLongRemove(ItemOrder item, int position) {
+        cartDatabase.child(item.getUid()).child(item.getPid())
+                .removeValue()
+                .addOnSuccessListener(aVoid -> {
+                    cartList.remove(position);
+                    adapter.notifyItemRemoved(position);
+                    Toast.makeText(getContext(), "Berhasil Menghapus", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> Toast.makeText(getContext(), "Gagal Menghapus Barang", Toast.LENGTH_SHORT).show());
     }
 
 
-    private void deleteCart(Cart cart) {
-        Task<QuerySnapshot> personQuery = cartDatabaseReference
-                .whereEqualTo("uid", cart.getUid())
-                .get();
 
-        personQuery.addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    cartDatabaseReference.document(document.getId()).delete()
-                            .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show())
-                            .addOnFailureListener(e -> Toast.makeText(getContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show());
-                }
-            } else {
-                Toast.makeText(getContext(), "Không tìm thấy giỏ hàng trong database ", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
 
 

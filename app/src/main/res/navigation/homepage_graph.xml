@@ -37,8 +37,8 @@
             app:argType="string"
             app:nullable="true" />
         <action
-            android:id="@+id/action_detailItemFragment2_to_keranjangFragment"
-            app:destination="@id/keranjangFragment" />
+            android:id="@+id/action_detailItemFragment2_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"

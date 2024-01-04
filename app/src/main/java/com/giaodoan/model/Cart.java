@@ -4,14 +4,14 @@ public class Cart {
     private String uid;
     private String pid;
     private String name;
-    private Integer quantity;
+    private int quantity;
     private String price;
     private String img_url;
 
     public Cart() {
     }
 
-    public Cart(String uid, String pid, String name, Integer quantity, String price, String img_url) {
+    public Cart(String uid, String pid, String name, int quantity, String price, String img_url) {
         this.uid = uid;
         this.pid = pid;
         this.name = name;
@@ -44,11 +44,11 @@ public class Cart {
         this.name = name;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

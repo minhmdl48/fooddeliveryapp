@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_home"
         android:title="Home" />
     <item
-        android:id="@+id/keranjangFragment"
+        android:id="@+id/cartFragment"
         android:icon="@drawable/ic_cart"
         android:title="Giỏ hàng" />
     <item
@@ -14,9 +14,9 @@
         android:icon="@drawable/ic_baseline_search_24"
         android:title="Tìm kiếm" />
     <item
-        android:id="@+id/pesananFragment"
+        android:id="@+id/checkoutFragment"
         android:icon="@drawable/ic_order"
-        android:title="Đặt hàng" />
+        android:title="Thanh toán" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_baseline_account_circle_24"

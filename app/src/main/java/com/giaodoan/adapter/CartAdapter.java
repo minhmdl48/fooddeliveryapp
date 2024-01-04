@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.giaodoan.databinding.RvCartBinding;
 import com.giaodoan.model.Cart;
+import com.giaodoan.model.ItemOrder;
 
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<Cart> list;
+    private ArrayList<ItemOrder> list;
     private OnLongClickRemove onLongClickRemove;
 
-    public CartAdapter(Context context, ArrayList<Cart> list, OnLongClickRemove onLongClickRemove) {
+    public CartAdapter(Context context, ArrayList<ItemOrder> list, OnLongClickRemove onLongClickRemove) {
         this.context = context;
         this.list = list;
         this.onLongClickRemove = onLongClickRemove;
@@ -42,9 +43,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Cart currentItem = list.get(position);
+        ItemOrder currentItem = list.get(position);
 
-        Glide.with(context).load(currentItem.getImg_url()).into(holder.binding.cartImage);
+        Glide.with(context).load(currentItem.getImageUrl()).into(holder.binding.cartImage);
         holder.binding.cartItemName.setText(currentItem.getName());
         holder.binding.cartItemPrice.setText("đ" + currentItem.getPrice());
         holder.binding.cartItemQuantity.setText(String.valueOf(currentItem.getQuantity()));
@@ -61,7 +62,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     public interface OnLongClickRemove {
-        void onLongRemove(Cart item, int position);
+        void onLongRemove(ItemOrder item, int position);
     }
 }
-
