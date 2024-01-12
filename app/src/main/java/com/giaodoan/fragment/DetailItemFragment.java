@@ -131,6 +131,8 @@ public class DetailItemFragment extends Fragment {
             ItemOrder orderedProduct = new ItemOrder(currentUID, productId, orderName, orderQuantity, orderPrice, orderImageUrl);
             addDataToCartDatabase(orderedProduct);
 
+            Navigation.findNavController(v).navigate(R.id.action_detailItemFragment2_to_homeFragment);
+
         });
     }
 
