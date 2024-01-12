@@ -31,7 +31,7 @@
             android:text="Cà phê sữa đá"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="24sp"/>
+            android:textSize="16sp"/>
         <TextView
             android:fontFamily="@font/nmedium"
             android:id="@+id/pop_price"
@@ -40,7 +40,7 @@
             android:layout_gravity="center"
             android:gravity="right"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:text="đ29000"/>
 
 

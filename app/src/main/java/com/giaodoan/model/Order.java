@@ -6,15 +6,17 @@ public class Order {
     private String status;
     private String price;
     private String quantity;
+    private String ordertime;
 
     public Order() {
     }
-    public Order(String uid, String oid, String status, String price, String quantity) {
+    public Order(String uid, String oid, String status, String price, String quantity, String ordertime) {
         this.uid = uid;
         this.oid = oid;
         this.status = status;
         this.price = price;
         this.quantity = quantity;
+        this.ordertime = ordertime;
     }
 
     public String getOid() {
@@ -55,5 +57,13 @@ public class Order {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getOrdertime() {
+        return ordertime;
+    }
+
+    public void setOrdertime(String ordertime) {
+        this.ordertime = ordertime;
     }
 }

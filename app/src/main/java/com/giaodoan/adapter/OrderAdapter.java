@@ -41,12 +41,13 @@ public class OrderAdapter  extends RecyclerView.Adapter<OrderAdapter.ViewHolder>
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Order currentItem = list.get(position);
 
-            holder.binding.orderTitle.setText(context.getString(R.string.order_title) + currentItem.getOid());
-            holder.binding.orderItemQuantity.setText(R.string.order_item_quantity);
-            holder.binding.orderTvItemQuantity.setText(currentItem.getQuantity());
+            holder.binding.orderTitle.setText(context.getString(R.string.order_title)+"  " + currentItem.getOid());
+            holder.binding.orderTime.setText(R.string.order_time);
+            holder.binding.orderTvTime.setText(currentItem.getOrdertime());
             holder.binding.orderStatus.setText("Trạng thái : " + currentItem.getStatus());
 
-            holder.binding.orderTvTotalPrice.setText(R.string.item_price + currentItem.getPrice());
+            String totalPriceText = context.getString(R.string.item_price, currentItem.getPrice());
+            holder.binding.orderTvTotalPrice.setText(totalPriceText);
         }
 
         @Override

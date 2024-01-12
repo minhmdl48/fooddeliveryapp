@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 import java.util.Base64;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +31,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class CheckoutFragment extends Fragment {
@@ -99,7 +103,14 @@ public class CheckoutFragment extends Fragment {
                 Order order = new Order();
                 order.setUid(Objects.requireNonNull(auth.getCurrentUser()).getUid());
                 order.setPrice(String.valueOf(totalPrice));
+                Date now = new Date();
 
+// Create a SimpleDateFormat object with the desired format
+                SimpleDateFormat sdf = new SimpleDateFormat("EEEEE hh:mm dd-MM-yyyy", Locale.getDefault());
+
+// Format the current date and time
+                String formattedDate = sdf.format(now);
+                order.setOrdertime(formattedDate);
                 order.setOid(oid);
 
                 // Add the order to the database

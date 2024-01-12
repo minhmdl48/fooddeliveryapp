@@ -18,23 +18,23 @@
 
     <TextView
         android:fontFamily="@font/nmedium"
-        android:id="@+id/order_item_quantity"
+        android:id="@+id/order_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/order_title"
         android:layout_marginStart="38dp"
-        android:text="Số lượng món: "
+        android:text="Thời gian đặt hàng "
         android:textColor="@color/black"
         android:textSize="15sp" />
 
     <TextView
         android:fontFamily="@font/nmedium"
-        android:id="@+id/order_tv_item_quantity"
+        android:id="@+id/order_tv_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/order_title"
         android:layout_marginEnd="38dp"
-        android:layout_toRightOf="@id/order_item_quantity"
+        android:layout_toRightOf="@id/order_time"
         android:gravity="right"
         android:text="1"
         android:textColor="@color/black" />
@@ -42,7 +42,7 @@
     <TextView
         android:fontFamily="@font/nmedium"
         android:id="@+id/order_total_price"
-        android:layout_below="@id/order_item_quantity"
+        android:layout_below="@id/order_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
@@ -55,9 +55,9 @@
         android:id="@+id/order_tv_total_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/order_item_quantity"
+        android:layout_below="@id/order_time"
         android:layout_marginEnd="38dp"
-        android:layout_toRightOf="@id/order_item_quantity"
+        android:layout_toRightOf="@id/order_time"
         android:gravity="right"
         android:text="đ100000"
         android:textColor="@color/black" />
