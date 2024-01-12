@@ -49,6 +49,8 @@ public class OrderController extends Fragment {
 
     private FirebaseAuth auth;
     private ArrayList<Item> itemList = new ArrayList<>();
+    private ArrayList<Order> orderList = new ArrayList<>();
+
     private String currentUID;
     private String orderImageUrl;
     private String orderName;
@@ -66,102 +68,18 @@ public class OrderController extends Fragment {
         currentUID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = DetailItemFragmentBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        BottomNavigationView bottomNavigation = requireActivity().findViewById(R.id.bottom_navigationView);
-        bottomNavigation.setVisibility(View.GONE);
-
-        assert getArguments() != null;
-        String productId = getArguments().getString("productId");
-        Log.d("DetailItemFragment","productId: "+productId);
-
-        binding.detailBackButton.setOnClickListener(v -> Navigation.findNavController(requireView()).popBackStack());
-
-        collectionReference.whereEqualTo("id",productId).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                    Item item = document.toObject(Item.class);
-                    itemList.add(item);
-
-                    Log.d("DetailItemFragment","description: "+item.getDescription());
-                }
-                if (!itemList.isEmpty()) {
-                    Item item = itemList.get(0);
-
-                    orderImageUrl = item.getImageUrl();
-                    orderName = item.getName();
-
-                    binding.detailItemquantity.setText("0");
-                    binding.detailItemname.setText(item.getName());
-                    binding.detailPrice.setText("đ"+item.getPrice());
-                    binding.detailDesc.setText(item.getDescription());
-                    binding.addItem.setOnClickListener(v -> {
-                        // Handle the click event here
-                        // For example, you can increase the quantity of the item
-                        int currentQuantity = Integer.parseInt(binding.detailItemquantity.getText().toString());
-                        currentQuantity++;
-                        binding.detailItemquantity.setText(String.valueOf(currentQuantity));
-                    });
-
-                    binding.removeItem.setOnClickListener(v -> {
-                        // Handle the click event here
-                        // Decrease the quantity of the item
-                        int currentQuantity = Integer.parseInt(binding.detailItemquantity.getText().toString());
-                        currentQuantity = Math.max(0, currentQuantity - 1); // Ensure the quantity doesn't go below 0
-                        binding.detailItemquantity.setText(String.valueOf(currentQuantity));
-                    });
-
-
-                    // Load the image using Glide
-                    Glide.with(requireContext())
-                            .load(item.getImageUrl())
-                            .into(binding.detailImg);
-                }
-            } else {
-                Toast.makeText(requireContext(), Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        binding.detailAddbutton.setOnClickListener(v -> {
-            // Get the quantity from the TextView and convert it to an integer
-            orderQuantity = Integer.parseInt(binding.detailItemquantity.getText().toString());
-
-            // Get the price from the TextView, remove the currency symbol, and convert it to a double
-            String priceText = binding.detailPrice.getText().toString().replace("đ", "");
-            int price = Integer.parseInt(priceText);
-
-            // Calculate the total price for the quantity ordered
-            orderPrice = String.valueOf(price * orderQuantity);
-
-            // Create the orderedProduct object and add it to the database
-            //mocking data + logic create from cartItems
-            ItemOrder[] orderedProducts = {new ItemOrder(currentUID, productId, orderName, orderQuantity, orderPrice, orderImageUrl)};
-            Date date = Calendar.getInstance().getTime();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-            String strDate = dateFormat.format(date);
-            createOrder(orderedProducts,strDate, "0");
-
-        });
-    }
-
+    //Người dùng tạo đơn
     private void createOrder(ItemOrder[] orderedProducts, String timerTime, String note ) {
         float total = countMoneyFromCart(orderedProducts);
         String uid = currentUID;
         Order order = new Order(
-                " ",
+                "orderId", // orderId để phân biệt các đơn hàng ( Primary Key)
                 uid,
                 //1: Mới tạo
                 //2: Admin đã chấp nhận -> đơn đc chấp nhận
                 //3: Hủy
                 //4: Hoàn thành
-                1,
+                1, //Trạng thái của đơn hàng
                 total,
                 orderedProducts,
                 timerTime,
@@ -176,7 +94,7 @@ public class OrderController extends Fragment {
             }
         });
     }
-
+    // Tính tổng tiền cho đơn hàng
     public float countMoneyFromCart(ItemOrder[] orders) {
         float total = 0;
         for(int i =0 ; i < orders.length; i++) {
@@ -185,5 +103,72 @@ public class OrderController extends Fragment {
         }
         return total;
     }
+
+    //Người dùng hủy đơn: Thay đổi trạng thái order thành 3 với id của order
+    public void UserCancelOrder(String oid){
+        orderDatabaseReference.document(oid).update("status", 3).addOnSuccessListener(aVoid ->{
+            Log.d("CancelOrder","CancelOrder: "+oid);
+            Toast.makeText(requireContext(), "Hủy đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
+        })
+                .addOnFailureListener(e -> Toast.makeText(requireContext(), Objects.requireNonNull(e.getMessage()), Toast.LENGTH_SHORT).show());;
+    }
+
+    //Người dùng lấy danh sách order
+    public void UserGetOrders(String uid) {
+        orderDatabaseReference.whereEqualTo("userId",uid).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                    Order order = document.toObject(Order.class);
+                    orderList.add(order);
+                }
+
+                if (!orderList.isEmpty()) {
+                    //binding...
+                }
+
+            } else {
+                Toast.makeText(requireContext(), Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //admin lấy danh sách order
+    public void AdminGetOrders() {
+        orderDatabaseReference.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                    Order order = document.toObject(Order.class);
+                    orderList.add(order);
+                }
+
+                if (!orderList.isEmpty()) {
+                    //binding...
+                }
+
+            } else {
+                Toast.makeText(requireContext(), Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //admin chấp nhận đơn
+    public void AdminAcceptOrder(String oid){
+        orderDatabaseReference.document(oid).update("status", 2).addOnSuccessListener(aVoid ->{
+                    Log.d("AcceptOrder","AcceptOrder: "+oid);
+                    Toast.makeText(requireContext(), "Xác nhận đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> Toast.makeText(requireContext(), Objects.requireNonNull(e.getMessage()), Toast.LENGTH_SHORT).show());;
+    }
+
+    //admin hoàn thành đơn
+    public void AdminFinishOrder(String oid){
+        orderDatabaseReference.document(oid).update("status", 4).addOnSuccessListener(aVoid ->{
+                    Log.d("FinishOrder","FinishOrder: "+oid);
+                    Toast.makeText(requireContext(), "Hoàn thành đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> Toast.makeText(requireContext(), Objects.requireNonNull(e.getMessage()), Toast.LENGTH_SHORT).show());;
+    }
+
+    //Thanh toán
 }
 
