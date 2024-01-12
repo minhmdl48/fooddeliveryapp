@@ -14,8 +14,8 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/pop_image"
-            android:layout_width="270dp"
-            android:layout_height="270dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             app:riv_corner_radius="8dp"
             android:scaleType="centerCrop"
 
@@ -40,6 +40,7 @@
             android:layout_gravity="center"
             android:gravity="right"
             android:textColor="@color/black"
+            android:textSize="20sp"
             android:text="đ29000"/>
 
 

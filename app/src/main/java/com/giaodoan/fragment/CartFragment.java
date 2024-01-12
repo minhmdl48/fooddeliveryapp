@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.giaodoan.R;
 import com.giaodoan.adapter.CartAdapter;
 import com.giaodoan.databinding.CartFragmentBinding;
-import com.giaodoan.model.Cart;
 import com.giaodoan.model.ItemOrder;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,15 +23,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class CartFragment extends Fragment implements CartAdapter.OnLongClickRemove {
+public class CartFragment extends Fragment implements CartAdapter.OnLongClickRemove, CartAdapter.OnQuantityChangeListener {
 
     private CartFragmentBinding binding;
     private ArrayList<ItemOrder> cartList;
@@ -42,10 +36,6 @@ public class CartFragment extends Fragment implements CartAdapter.OnLongClickRem
 
     private int totalPrice = 0;
     private DatabaseReference cartDatabase= FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("carts");
-
-
-    private CollectionReference cartDatabaseReference = FirebaseFirestore.getInstance().collection("carts");
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,18 +58,29 @@ public class CartFragment extends Fragment implements CartAdapter.OnLongClickRem
 
         retrieveCartItems();
 
-        adapter = new CartAdapter(requireContext(), cartList, this);
+        adapter = new CartAdapter(requireContext(), cartList, this,this);
         binding.rvCarts.setAdapter(adapter);
 
         binding.rvCarts.setLayoutManager(layoutManager);
 
 
         binding.cartCheckout.setOnClickListener(v -> {
-            if (cartList.isEmpty()) {
-                Toast.makeText(requireActivity(), "Giỏ hàng của bạn đang trống", Toast.LENGTH_LONG).show();
+            if (auth.getCurrentUser() != null) {
+                if (cartList.isEmpty()) {
+                    Toast.makeText(requireActivity(), "Giỏ hàng của bạn đang trống", Toast.LENGTH_LONG).show();
+                } else {
+                    for (ItemOrder item : cartList) {
+                        cartDatabase.child(auth.getCurrentUser().getUid())
+                                .child(item.getPid())
+                                .setValue(item)
+                                .addOnSuccessListener(aVoid -> Log.d("CartFragment", "Cập nhật giỏ hàng thành công"))
+                                .addOnFailureListener(e -> Toast.makeText(getContext(), "Cập nhật giỏ hàng thất bại", Toast.LENGTH_SHORT).show());
+                    }
+                    Navigation.findNavController(requireView())
+                            .navigate(R.id.action_cartFragment_to_checkoutFragment);
+                }
             } else {
-                Navigation.findNavController(requireView())
-                        .navigate(R.id.action_cartFragment_to_checkoutFragment);
+                Toast.makeText(requireActivity(), "Bạn cần đăng nhập để đặt món", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -120,9 +121,18 @@ public class CartFragment extends Fragment implements CartAdapter.OnLongClickRem
                 .addOnSuccessListener(aVoid -> {
                     cartList.remove(position);
                     adapter.notifyItemRemoved(position);
-                    Toast.makeText(getContext(), "Berhasil Menghapus", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Xóa thành công ", Toast.LENGTH_SHORT).show();
                 })
-                .addOnFailureListener(e -> Toast.makeText(getContext(), "Gagal Menghapus Barang", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(getContext(), "Xóa thất bại", Toast.LENGTH_SHORT).show());
+    }
+    @Override
+    public void onQuantityChange() {
+        cartList= adapter.getUpdatedList();
+        totalPrice = 0;
+        for (ItemOrder item : cartList) {
+            totalPrice += Integer.parseInt(item.getPrice());
+        }
+        binding.tvTotalPrice.setText("đ"+ totalPrice);
     }
 
 

@@ -6,4 +6,7 @@
     <string name="login_title">Đăng nhập</string>
     <string name="currency_symbol">đ</string>
     <string name="item_price">đ %1$s</string>
+    <string name="order_title">Đơn hàng </string>
+    <string name="order_item_quantity">Số lượng món: </string>
+
 </resources>

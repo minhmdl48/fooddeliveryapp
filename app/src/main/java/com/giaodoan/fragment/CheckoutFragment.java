@@ -7,28 +7,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
+import java.util.Base64;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.giaodoan.R;
 import com.giaodoan.adapter.TitleOnlyAdapter;
 import com.giaodoan.databinding.CheckoutFragmentBinding;
 import com.giaodoan.model.ItemOrder;
+import com.giaodoan.model.Order;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class CheckoutFragment extends Fragment {
     private CheckoutFragmentBinding binding;
+    private CollectionReference orderDatabaseReference = FirebaseFirestore.getInstance().collection("orders");
     private ArrayList<ItemOrder> cartList;
     private FirebaseAuth auth;
     private TitleOnlyAdapter adapter;
@@ -38,6 +43,7 @@ public class CheckoutFragment extends Fragment {
     private DatabaseReference cartDatabase= FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("carts");
 
     private AlertDialog.Builder builder;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -73,12 +79,43 @@ public class CheckoutFragment extends Fragment {
             Toast.makeText(getActivity(), "Đã thanh toán thành công" + totalPrice, Toast.LENGTH_LONG).show();
 
             if (!cartList.isEmpty()) {
+                // Generate a unique string based on current time
+                String timeString = String.valueOf(System.currentTimeMillis());
+                String base64Table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+                StringBuilder oidBuilder = new StringBuilder();
+                for (int i = 0; i < timeString.length() - 2; i += 2) {
+                    String chunk = timeString.substring(i, i + 2);
+                    int index = Integer.parseInt(chunk);
+                    oidBuilder.append(base64Table.charAt(index % 64)); // Use modulo 64 to ensure index is within base64 table range
+                }
+
+                // Append the last two characters without translation
+                oidBuilder.append(timeString.substring(timeString.length() - 2));
+
+                String oid = oidBuilder.toString();
+
+                // Create an Order object
+                Order order = new Order();
+                order.setUid(Objects.requireNonNull(auth.getCurrentUser()).getUid());
+                order.setPrice(String.valueOf(totalPrice));
+
+                order.setOid(oid);
+
+                // Add the order to the database
+                orderDatabaseReference.document(oid).set(order)
+                        .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to place order", Toast.LENGTH_SHORT).show());
+
+
                 deleteCart();
                 cartList.clear();
                 adapter.notifyDataSetChanged();
             }
 
-            Navigation.findNavController(v).popBackStack();
+
+            Navigation.findNavController(requireView())
+                    .navigate(R.id.action_checkoutFragment_to_homeFragment);
         });
     }
 
@@ -107,14 +144,10 @@ public class CheckoutFragment extends Fragment {
     }
 
     private void deleteCart() {
-        cartDatabase.child(auth.getCurrentUser().getUid())
+        cartDatabase.child(Objects.requireNonNull(auth.getCurrentUser()).getUid())
                 .removeValue()
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(getContext(), "Xóa giỏ hàng thành công", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                });
+                .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Xóa giỏ hàng thành công", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show());
     }
 
 }

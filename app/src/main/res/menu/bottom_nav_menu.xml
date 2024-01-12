@@ -14,9 +14,9 @@
         android:icon="@drawable/ic_baseline_search_24"
         android:title="Tìm kiếm" />
     <item
-        android:id="@+id/checkoutFragment"
+        android:id="@+id/orderFragment"
         android:icon="@drawable/ic_order"
-        android:title="Thanh toán" />
+        android:title="Đơn hàng" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_baseline_account_circle_24"
