@@ -1,5 +1,6 @@
 package com.giaodoan.Controller;
 
+import static android.content.ContentValues.TAG;
 import static java.lang.Double.parseDouble;
 import static java.lang.Float.parseFloat;
 
@@ -20,6 +21,8 @@ import com.giaodoan.databinding.DetailItemFragmentBinding;
 import com.giaodoan.model.Item;
 import com.giaodoan.model.ItemOrder;
 import com.giaodoan.model.Order;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -64,29 +68,29 @@ public class OrderController extends Fragment {
         auth = FirebaseAuth.getInstance();
         collectionReference = FirebaseFirestore.getInstance().collection("products");
         cartDatabase = FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("carts");
-        orderDatabaseReference = FirebaseFirestore.getInstance().collection("orders");
+        this.orderDatabaseReference = FirebaseFirestore.getInstance().collection("orders");
         currentUID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
     }
 
     //Người dùng tạo đơn
     private void createOrder(ItemOrder[] orderedProducts, String timerTime, String note ) {
         float total = countMoneyFromCart(orderedProducts);
+        String strTotal = Float.toString(total);
         String uid = currentUID;
         Order order = new Order(
-                "orderId", // orderId để phân biệt các đơn hàng ( Primary Key)
                 uid,
+                "orderId", // orderId để phân biệt các đơn hàng ( Primary Key)
                 //1: Mới tạo
                 //2: Admin đã chấp nhận -> đơn đc chấp nhận
                 //3: Hủy
                 //4: Hoàn thành
-                1, //Trạng thái của đơn hàng
-                total,
-                orderedProducts,
-                timerTime,
-                note
+                "1", //Trạng thái của đơn hàng
+                strTotal,
+                "",
+                timerTime
         );
 
-        orderDatabaseReference.add(order).addOnCompleteListener(task -> {
+        this.orderDatabaseReference.add(order).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(requireContext(), "Thành công tạo Order!", Toast.LENGTH_SHORT).show();
             } else {
@@ -106,7 +110,7 @@ public class OrderController extends Fragment {
 
     //Người dùng hủy đơn: Thay đổi trạng thái order thành 3 với id của order
     public void UserCancelOrder(String oid){
-        orderDatabaseReference.document(oid).update("status", 3).addOnSuccessListener(aVoid ->{
+        this.orderDatabaseReference.document(oid).update("status", 3).addOnSuccessListener(aVoid ->{
             Log.d("CancelOrder","CancelOrder: "+oid);
             Toast.makeText(requireContext(), "Hủy đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
         })
@@ -115,7 +119,7 @@ public class OrderController extends Fragment {
 
     //Người dùng lấy danh sách order
     public void UserGetOrders(String uid) {
-        orderDatabaseReference.whereEqualTo("userId",uid).get().addOnCompleteListener(task -> {
+        this.orderDatabaseReference.whereEqualTo("userId",uid).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                     Order order = document.toObject(Order.class);
@@ -133,27 +137,30 @@ public class OrderController extends Fragment {
     }
 
     //admin lấy danh sách order
-    public void AdminGetOrders() {
-        orderDatabaseReference.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                    Order order = document.toObject(Order.class);
-                    orderList.add(order);
-                }
+    public ArrayList<Order> AdminGetOrders(CollectionReference orderDatabaseReference) {
+        orderList = new ArrayList<Order>();
+        orderDatabaseReference.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete( Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                orderList.add(document.toObject(Order.class));
+                            }
+                            Log.d("abcd12345", String.valueOf(orderList.size()));
 
-                if (!orderList.isEmpty()) {
-                    //binding...
-                }
-
-            } else {
-                Toast.makeText(requireContext(), Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
         });
+
+        return orderList;
     }
 
     //admin chấp nhận đơn
     public void AdminAcceptOrder(String oid){
-        orderDatabaseReference.document(oid).update("status", 2).addOnSuccessListener(aVoid ->{
+        this.orderDatabaseReference.document(oid).update("status", 2).addOnSuccessListener(aVoid ->{
                     Log.d("AcceptOrder","AcceptOrder: "+oid);
                     Toast.makeText(requireContext(), "Xác nhận đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
                 })
@@ -162,7 +169,7 @@ public class OrderController extends Fragment {
 
     //admin hoàn thành đơn
     public void AdminFinishOrder(String oid){
-        orderDatabaseReference.document(oid).update("status", 4).addOnSuccessListener(aVoid ->{
+        this.orderDatabaseReference.document(oid).update("status", 4).addOnSuccessListener(aVoid ->{
                     Log.d("FinishOrder","FinishOrder: "+oid);
                     Toast.makeText(requireContext(), "Hoàn thành đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
                 })

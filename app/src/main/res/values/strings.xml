@@ -7,6 +7,7 @@
     <string name="currency_symbol">đ</string>
     <string name="item_price">đ %1$s</string>
     <string name="order_title">Đơn hàng </string>
+    <string name="order_admin_title">Đơn hàng admin</string>
     <string name="order_time">Thời gian đặt hàng </string>
 
 </resources>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/order_title_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="20dp"
+
+        android:layout_marginBottom="5dp"
+        android:text="Mã đơn hàng: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:fontFamily="@font/nbold" />
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/order_id_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="38dp"
+        android:layout_marginTop="24dp"
+        android:layout_toRightOf="@id/order_title_admin"
+        android:gravity="right"
+        android:text="1"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/order_time_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_title_admin"
+        android:layout_marginStart="38dp"
+        android:text="Thời gian đặt hàng "
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/order_tv_time_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_title_admin"
+        android:layout_marginEnd="38dp"
+        android:layout_toRightOf="@id/order_time_admin"
+        android:gravity="right"
+        android:text="1"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/order_total_price_admin"
+        android:layout_below="@id/order_time_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:text="Tổng tiền: "
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/order_tv_total_price_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_time_admin"
+        android:layout_marginEnd="38dp"
+        android:layout_toRightOf="@id/order_total_price_admin"
+        android:gravity="right"
+        android:text="đ100000"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/order_status_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_total_price_admin"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="3dp"
+        android:text="Trạng thái :"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:fontFamily="@font/nbold" />
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/order_tv_status_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_total_price_admin"
+        android:layout_marginEnd="38dp"
+        android:layout_toRightOf="@id/order_status_admin"
+        android:gravity="right"
+        android:text="Đơn mới"
+        android:textColor="@color/black" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/admin_accept"
+        style="@style/ButtonCoklat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_tv_status_admin"
+        android:textSize="10sp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:paddingRight="12px"
+        android:paddingLeft="12px"
+        android:text="Chấp nhận" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/admin_cancel"
+        style="@style/ButtonCoklat"
+        android:backgroundTint="@color/barn_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_tv_status_admin"
+        android:textSize="10sp"
+       android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/admin_accept"
+        android:paddingRight="12px"
+        android:paddingLeft="12px"
+        android:text="Hủy" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/admin_finish"
+        style="@style/ButtonCoklat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_tv_status_admin"
+        android:layout_toRightOf="@id/admin_cancel"
+        android:textSize="10sp"
+        android:layout_marginTop="10dp"
+        android:paddingRight="12px"
+        android:paddingLeft="12px"
+        android:text="Hoàn thành đơn" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/order_status_admin"
+        android:layout_marginTop="20dp"
+        android:background="@color/underline" />
+
+
+
+</RelativeLayout>
