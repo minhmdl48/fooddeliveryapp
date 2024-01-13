@@ -60,19 +60,16 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
 
         //Implement Items Recycle View All product
         GridLayoutManager productLayoutManager = new GridLayoutManager(getContext(), 2);
-
+        setItemsData();
         itemAdapter = new ItemsShowAdapter(requireContext(), itemList, this);
-
         binding.rvAllItem.setLayoutManager(productLayoutManager);
         binding.rvAllItem.setAdapter(itemAdapter);
-        setItemsData();
 
-        //Implement Popular Items Recycle Items
+        setItemsPopular();
         LinearLayoutManager productLayoutManagerPop = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         itemAdapter2 = new ItemsPopularAdapter(requireContext(), itemListPopular, this);
         binding.rvPopular.setLayoutManager(productLayoutManagerPop);
         binding.rvPopular.setAdapter(itemAdapter2);
-        setItemsPopular();
 
         // got to search
         binding.searchBox.setOnClickListener(view1 -> Navigation.findNavController(requireView())
@@ -96,7 +93,6 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
         });
     }
 
-
     private void setItemsPopular() {
         collectionReference.whereEqualTo("type", "popular").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -105,10 +101,9 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
                     Item item = document.toObject(Item.class);
                     itemListPopular.add(item);
                     Log.d("HomeFragment", "itemId: " + item.getId());
-                    Log.d("HomeFragment", "name: " + item.getName());
-                    Log.d("HomeFragment", "description: " + item.getDescription());
+
                 }
-                itemAdapter.notifyDataSetChanged();
+                itemAdapter2.notifyDataSetChanged();
             } else {
                 Toast.makeText(requireContext(), Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -117,10 +112,6 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
 
     @Override
     public void onClickProduct(Item item) {
-        // Handle the click event here
-        // For example, you can show a Toast message
-
-        Toast.makeText(getContext(), "Item clicked: " + item.getName(), Toast.LENGTH_SHORT).show();
 
         // Create a new Bundle to pass the clicked item's ID to the ProductDetailFragment
         Bundle bundle = new Bundle();

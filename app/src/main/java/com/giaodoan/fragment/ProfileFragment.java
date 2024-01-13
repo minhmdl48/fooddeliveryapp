@@ -51,9 +51,6 @@ public class ProfileFragment extends Fragment {
 
         binding.profileQuestion.setOnClickListener(v -> Toast.makeText(requireActivity(), "Tính năng chưa sẵn sàng", Toast.LENGTH_SHORT).show());
 
-        ;
-
-
         binding.profileLogout.setOnClickListener(v -> {
             auth.signOut();
             Intent intent = new Intent(getActivity(), MainActivity.class);

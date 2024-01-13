@@ -62,45 +62,14 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="8dp"
-                    android:text="Minh"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:fontFamily="@font/nbold"
-                    android:id="@+id/ed_saldo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_below="@id/tv_saldo"
-                    android:text="đ20000"
-                    android:textSize="20sp"
+                    android:text="Chào mừng tới A Coffee "
+                    android:textColor="@color/starbucks_black"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_below="@id/tv_saldo"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_toEndOf="@id/ed_saldo"
-                    android:src="@drawable/ic_baseline_account_balance_wallet_24" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/roundstyle"
-                    android:backgroundTint="@color/starbucks_green"
-                    android:fontFamily="@font/nmedium"
-                    android:text="+ Nạp tiền "
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
                     android:textSize="20sp" />
+
+
+
+
 
             </RelativeLayout>
 
@@ -140,7 +109,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ly1"
-                android:layout_margin="5dp" />
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp" />
 
             <LinearLayout
                 android:id="@+id/ly2"
