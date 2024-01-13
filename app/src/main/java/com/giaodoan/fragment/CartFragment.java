@@ -60,9 +60,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnLongClickRem
 
         adapter = new CartAdapter(requireContext(), cartList, this,this);
         binding.rvCarts.setAdapter(adapter);
-
         binding.rvCarts.setLayoutManager(layoutManager);
-
 
         binding.cartCheckout.setOnClickListener(v -> {
             if (auth.getCurrentUser() != null) {
@@ -134,10 +132,5 @@ public class CartFragment extends Fragment implements CartAdapter.OnLongClickRem
         }
         binding.tvTotalPrice.setText("đ"+ totalPrice);
     }
-
-
-
-
-
 
 }

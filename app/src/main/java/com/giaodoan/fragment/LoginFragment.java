@@ -1,5 +1,6 @@
 package com.giaodoan.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,15 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
 import com.giaodoan.Activity.HomePageActivity;
 import com.giaodoan.R;
 import com.giaodoan.databinding.LoginFragmentBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -56,7 +57,11 @@ public class LoginFragment extends Fragment {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Log.d("LoginFragment", "Email sent."+mail);
-                            Toast.makeText(requireActivity(), "Đã gửi link đặt lại mật khẩu tại: "+mail, Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(requireActivity())
+                                    .setTitle("Password Reset")
+                                    .setMessage("Đã gửi link đặt lại mật khẩu tại: " + mail)
+                                    .setPositiveButton(android.R.string.ok, null)
+                                    .show();
                         }
                     });
         });
@@ -66,7 +71,6 @@ public class LoginFragment extends Fragment {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(requireActivity(), "Đăng nhập thành công!!", Toast.LENGTH_SHORT).show();
 
                         // For Activity
                         Intent intent = new Intent(getActivity(), HomePageActivity.class);

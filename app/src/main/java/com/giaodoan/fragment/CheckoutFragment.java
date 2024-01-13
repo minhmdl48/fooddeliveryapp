@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Base64;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -30,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -41,13 +40,10 @@ public class CheckoutFragment extends Fragment {
     private ArrayList<ItemOrder> cartList;
     private FirebaseAuth auth;
     private TitleOnlyAdapter adapter;
-
     private int totalPrice = 0;
-
-    private DatabaseReference cartDatabase= FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("carts");
-
+    private DatabaseReference cartDatabase = FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("carts");
+    private DatabaseReference itemorderedDatabase = FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("itemordered");
     private AlertDialog.Builder builder;
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -62,21 +58,18 @@ public class CheckoutFragment extends Fragment {
         binding = CheckoutFragmentBinding.bind(view);
         auth = FirebaseAuth.getInstance();
 
-        // Initialize cartList
         cartList = new ArrayList<>();
 
-        // Initialize the adapter and set it to the RecyclerView
         adapter = new TitleOnlyAdapter(getContext(), cartList);
         binding.rvTitle.setAdapter(adapter);
         binding.rvTitle.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Call retrieveCartItems
         retrieveCartItems();
         Log.d("CheckoutFragment", "onViewCreated: " + totalPrice);
 
         binding.checkoutButton.setOnClickListener(v -> {
             new AlertDialog.Builder(getContext())
-                    .setTitle("Mã nhận hàng")
+                    .setTitle("Thanh toán thành công")
                     .setMessage("Vui lòng đưa mã cho nhân viên tại quầy để nhận đồ uống")
                     .setPositiveButton("OK", (dialog, id) -> dialog.cancel())
                     .show();
@@ -105,10 +98,8 @@ public class CheckoutFragment extends Fragment {
                 order.setPrice(String.valueOf(totalPrice));
                 Date now = new Date();
 
-// Create a SimpleDateFormat object with the desired format
                 SimpleDateFormat sdf = new SimpleDateFormat("EEEEE hh:mm dd-MM-yyyy", Locale.getDefault());
 
-// Format the current date and time
                 String formattedDate = sdf.format(now);
                 order.setOrdertime(formattedDate);
                 order.setOid(oid);
@@ -117,13 +108,15 @@ public class CheckoutFragment extends Fragment {
                 orderDatabaseReference.document(oid).set(order)
                         .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to place order", Toast.LENGTH_SHORT).show());
+                //set item ordered to database
+                itemorderedDatabase.child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).child(oid).setValue(cartList)
+                        .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to place order", Toast.LENGTH_SHORT).show());
 
-
-                deleteCart();
+                deleteCart(); //delete cart in carts database after checkout
                 cartList.clear();
                 adapter.notifyDataSetChanged();
             }
-
 
             Navigation.findNavController(requireView())
                     .navigate(R.id.action_checkoutFragment_to_homeFragment);
@@ -144,7 +137,7 @@ public class CheckoutFragment extends Fragment {
 
                             adapter.notifyDataSetChanged();
                         }
-                        binding.txtViewPriceTotal.setText("đ "+totalPrice );
+                        binding.txtViewPriceTotal.setText("đ " + totalPrice);
                     }
 
                     @Override

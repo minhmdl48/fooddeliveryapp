@@ -144,7 +144,7 @@ public class DetailItemFragment extends Fragment {
         product.put("quantity", orderedProduct.getQuantity());
         product.put("price", orderedProduct.getPrice());
         product.put("imageUrl", orderedProduct.getImageUrl());
-
+        String time = String.valueOf(System.currentTimeMillis());
         cartDatabase.child(currentUID).child(orderedProduct.getPid()).updateChildren(product)
                 .addOnSuccessListener(aVoid ->{
                     Log.d("DetailItemFragment","addDataToCartDatabase: "+product);

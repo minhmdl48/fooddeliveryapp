@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.giaodoan.R;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class OrderFragment  extends Fragment {
         private OrderFragmentBinding binding;
@@ -53,20 +55,32 @@ public class OrderFragment  extends Fragment {
 
             retriveOrderList();
             adapter = new OrderAdapter(requireContext(), orderList);
+            adapter.setOnItemClickListener(position -> {
+                Order clickedOrder = orderList.get(position);
+                String oid = clickedOrder.getOid();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("oid", oid);
+
+                DetailOrderFragment detailOrderFragment = new DetailOrderFragment();
+                detailOrderFragment.setArguments(bundle);
+
+                Navigation.findNavController(view).navigate(R.id.action_orderFragment_to_orderDetailFragment, bundle);
+            });
             binding.rvOrder.setAdapter(adapter);
             binding.rvOrder.setLayoutManager(layoutManager);
+
         }
 
     private void retriveOrderList() {
         orderDatabaseReference
-                .whereEqualTo("uid", auth.getCurrentUser().getUid())
+                .whereEqualTo("uid", Objects.requireNonNull(auth.getCurrentUser()).getUid())
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     for (QueryDocumentSnapshot item : querySnapshot) {
                         Order order = item.toObject(Order.class);
 
                         orderList.add(order);
-                        Log.d("OrderFragment" , "userid"+order.getUid());
                         adapter.notifyDataSetChanged();
                     }
                 })

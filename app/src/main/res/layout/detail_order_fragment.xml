@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBFBFB"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.CheckoutFragment">
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/order_back_button"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        app:navigationIcon="@drawable/ic_arow_back_left">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chi tiết đơn hàng"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+
+    <View
+        android:id="@+id/checkout_order_view"
+        android:layout_width="match_parent"
+        android:layout_height="65sp"
+        android:layout_below="@id/order_back_button"
+        android:layout_marginHorizontal="20sp"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/order_tv_code"
+        android:layout_below="@+id/order_back_button"
+        android:layout_marginTop="32sp"
+        android:layout_marginHorizontal="20sp"
+        android:fontFamily="@font/nbold"
+        android:text="Mã đơn hàng "
+        android:textColor="@color/starbucks_black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="end" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_tv_code"
+        android:layout_marginHorizontal="20sp"
+        android:layout_marginTop="5sp"
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/order_tv_time"
+        android:text="Thời gian đặt hàng "
+        android:textColor="@color/starbucks_black"
+        android:textSize="15sp"
+        />
+
+
+    <View
+        android:id="@+id/top_line"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_below="@+id/checkout_order_view"
+        android:layout_marginTop="10sp"
+        android:background="@color/underline" />
+
+
+    <TextView
+        android:fontFamily="@font/nbold"
+        android:id="@+id/textView_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_line"
+        android:layout_marginHorizontal="20sp"
+        android:layout_marginVertical="5sp"
+        android:text="Nhận tại "
+        android:textColor="@color/starbucks_black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <View
+        android:id="@+id/address_box"
+        android:layout_width="match_parent"
+        android:layout_height="90sp"
+        android:layout_below="@id/textView_address"
+        android:layout_marginHorizontal="20sp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/ly1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/textView_address"
+        android:layout_marginHorizontal="30sp"
+        android:layout_marginVertical="4sp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A Coffee Văn Quán"
+            android:textColor="@color/starbucks_black"
+            android:fontFamily="@font/nbold"/>
+
+        <TextView
+            android:fontFamily="@font/nmedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="3sp"
+            android:text="141 Chien Thang Street, Ha Noi"
+            android:lines="2"
+            android:textColor="@color/starbucks_black" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/center_line"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_below="@+id/address_box"
+        android:layout_marginTop="20sp"
+        android:background="@color/underline" />
+
+
+    <TextView
+        android:id="@+id/tv_orderlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/center_line"
+        android:layout_marginHorizontal="20sp"
+        android:layout_marginVertical="5sp"
+        android:text="Danh sách sản phẩm"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:fontFamily="@font/nbold" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_order_detail"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tv_orderlist"
+        android:layout_height="230sp"
+        android:layout_marginHorizontal="20sp" />
+    <RelativeLayout
+        android:id="@+id/new_view"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_below="@+id/rv_order_detail"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="@color/white">
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/nbold"
+            android:text="Tổng cộng"
+            android:textColor="@color/starbucks_black"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</RelativeLayout>
