@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Base64;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -30,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -44,8 +43,9 @@ public class CheckoutFragment extends Fragment {
 
     private int totalPrice = 0;
 
-    private DatabaseReference cartDatabase= FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("carts");
+    private DatabaseReference cartDatabase = FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("carts");
 
+    private DatabaseReference itemorderedDatabase = FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("itemordered");
     private AlertDialog.Builder builder;
 
 
@@ -117,7 +117,9 @@ public class CheckoutFragment extends Fragment {
                 orderDatabaseReference.document(oid).set(order)
                         .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to place order", Toast.LENGTH_SHORT).show());
-
+                itemorderedDatabase.child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).child(oid).setValue(cartList)
+                        .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to place order", Toast.LENGTH_SHORT).show());
 
                 deleteCart();
                 cartList.clear();
@@ -144,7 +146,7 @@ public class CheckoutFragment extends Fragment {
 
                             adapter.notifyDataSetChanged();
                         }
-                        binding.txtViewPriceTotal.setText("đ "+totalPrice );
+                        binding.txtViewPriceTotal.setText("đ " + totalPrice);
                     }
 
                     @Override

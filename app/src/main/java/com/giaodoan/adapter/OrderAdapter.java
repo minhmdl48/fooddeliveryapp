@@ -2,6 +2,7 @@ package com.giaodoan.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,10 @@ import java.util.ArrayList;
 public class OrderAdapter  extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
         private Context context;
         private ArrayList<Order> list;
+        private OnItemClickListener onItemClickListener;
+        public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+            this.onItemClickListener = onItemClickListener;
+        }
 
         public OrderAdapter(Context context, ArrayList<Order> list) {
             this.context = context;
@@ -23,11 +28,21 @@ public class OrderAdapter  extends RecyclerView.Adapter<OrderAdapter.ViewHolder>
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
+
             private RvOrderBinding binding;
 
             public ViewHolder(RvOrderBinding binding) {
                 super(binding.getRoot());
                 this.binding = binding;
+                // Set the click listener for the item view
+                itemView.setOnClickListener(v -> {
+                    if (onItemClickListener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            onItemClickListener.onItemClick(position);
+                        }
+                    }
+                });
             }
         }
 
@@ -54,6 +69,10 @@ public class OrderAdapter  extends RecyclerView.Adapter<OrderAdapter.ViewHolder>
         public int getItemCount() {
             return list.size();
         }
+        public interface OnItemClickListener {
+            void onItemClick(int position);
+        }
+
     }
 
 

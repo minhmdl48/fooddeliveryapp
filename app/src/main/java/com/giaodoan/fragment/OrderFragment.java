@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.giaodoan.R;
@@ -17,6 +18,8 @@ import com.giaodoan.adapter.OrderAdapter;
 import com.giaodoan.databinding.OrderFragmentBinding;
 import com.giaodoan.model.Order;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -53,8 +56,26 @@ public class OrderFragment  extends Fragment {
 
             retriveOrderList();
             adapter = new OrderAdapter(requireContext(), orderList);
+            adapter.setOnItemClickListener(new OrderAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    Order clickedOrder = orderList.get(position);
+                    String oid = clickedOrder.getOid();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("oid", oid);
+
+                    DetailOrderFragment detailOrderFragment = new DetailOrderFragment();
+                    detailOrderFragment.setArguments(bundle);
+
+                    // Assuming you're using the Navigation component
+                    Navigation.findNavController(view).navigate(R.id.action_orderFragment_to_orderDetailFragment, bundle);
+                }
+            });
             binding.rvOrder.setAdapter(adapter);
             binding.rvOrder.setLayoutManager(layoutManager);
+            // Assuming you have a RecyclerView and its adapter set up
+
         }
 
     private void retriveOrderList() {

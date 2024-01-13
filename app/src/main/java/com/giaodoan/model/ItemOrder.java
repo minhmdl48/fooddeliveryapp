@@ -8,6 +8,7 @@ public class ItemOrder {
     private String price;
     private String imageUrl;
 
+
     public ItemOrder() {
     }
     public ItemOrder(String uid, String pid, String name, int quantity, String price, String imageUrl) {

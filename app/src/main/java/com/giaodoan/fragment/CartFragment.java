@@ -69,6 +69,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnLongClickRem
                 if (cartList.isEmpty()) {
                     Toast.makeText(requireActivity(), "Giỏ hàng của bạn đang trống", Toast.LENGTH_LONG).show();
                 } else {
+
                     for (ItemOrder item : cartList) {
                         cartDatabase.child(auth.getCurrentUser().getUid())
                                 .child(item.getPid())
