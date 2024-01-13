@@ -22,7 +22,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterFragment extends Fragment {
-    private static final String TAG = "RegisterFragment";
     private RegisterFragmentBinding binding;
     private FirebaseAuth auth;
     private CollectionReference userDatabaseReference;
@@ -84,7 +83,7 @@ public class RegisterFragment extends Fragment {
                             Navigation.findNavController(requireView())
                                     .navigate(R.id.action_registerFragment2_to_loginFragment2);
                         } else {
-                            Log.d("RegisterFragment", "User creation failed: " + task.getException().getMessage());
+
                             Toast.makeText(requireActivity(), Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -98,7 +97,6 @@ public class RegisterFragment extends Fragment {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
 }
 
 

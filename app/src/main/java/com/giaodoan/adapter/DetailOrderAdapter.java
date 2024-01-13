@@ -46,7 +46,7 @@ public class DetailOrderAdapter extends RecyclerView.Adapter<com.giaodoan.adapte
 
         holder.binding.orderItemName.setText(currentItem.getName());
         Log.d("DetailOrderAdapter", "onBindViewHolder: "+currentItem.getName());
-        holder.binding.orderItemQuantity.setText(String.valueOf(currentItem.getQuantity()));
+        holder.binding.orderItemQuantity.setText("x"+String.valueOf(currentItem.getQuantity()));
         holder.binding.orderItemPrice.setText(context.getString(R.string.item_price, currentItem.getPrice()));
 
 

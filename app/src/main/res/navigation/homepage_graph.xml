@@ -91,8 +91,6 @@
             app:destination="@id/orderFragment" />
     </fragment>
 
-
-
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.giaodoan.fragment.ProfileFragment"
@@ -102,11 +100,5 @@
             android:id="@+id/action_profileFragment2_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
-
-
-
-
-
-
 
 </navigation>

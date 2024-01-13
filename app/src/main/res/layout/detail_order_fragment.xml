@@ -30,7 +30,7 @@
     <View
         android:id="@+id/checkout_order_view"
         android:layout_width="match_parent"
-        android:layout_height="60sp"
+        android:layout_height="65sp"
         android:layout_below="@id/order_back_button"
         android:layout_marginHorizontal="20sp"
         android:layout_marginTop="20sp"
@@ -47,7 +47,7 @@
         android:fontFamily="@font/nbold"
         android:text="Mã đơn hàng "
         android:textColor="@color/starbucks_black"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="end" />
     <TextView
@@ -60,7 +60,7 @@
         android:id="@+id/order_tv_time"
         android:text="Thời gian đặt hàng "
         android:textColor="@color/starbucks_black"
-        android:textSize="13sp"
+        android:textSize="15sp"
         />
 
 
@@ -88,7 +88,7 @@
     <View
         android:id="@+id/address_box"
         android:layout_width="match_parent"
-        android:layout_height="98sp"
+        android:layout_height="90sp"
         android:layout_below="@id/textView_address"
         android:layout_marginHorizontal="20sp"
         android:background="@drawable/roundstyle"
@@ -165,11 +165,5 @@
             android:textColor="@color/starbucks_black"
             android:textSize="18sp" />
     </RelativeLayout>
-
-
-
-
-
-
 
 </RelativeLayout>

@@ -40,8 +40,8 @@ public class DetailOrderFragment extends Fragment {
     private String totalPrice;
     private DetailOrderAdapter adapter;
 
-    private CollectionReference orderDatabaseReference = FirebaseFirestore.getInstance().collection("orders");
-    private DatabaseReference orderedDatabase= FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("itemordered");
+    private final CollectionReference orderDatabaseReference = FirebaseFirestore.getInstance().collection("orders");
+    private final DatabaseReference orderedDatabase= FirebaseDatabase.getInstance("https://acofee-order-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("itemordered");
 
     public DetailOrderFragment() {
         super(R.layout.detail_order_fragment);
@@ -99,10 +99,8 @@ public class DetailOrderFragment extends Fragment {
                         for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
                             ItemOrder itemorder = itemSnapshot.getValue(ItemOrder.class);
                             itemorderList.add(itemorder);
-                            Log.d("DetailOrderFragment", "onDataChange-name: "+itemorder.getName());
                             adapter.notifyDataSetChanged();
                         }
-
                     }
 
                     @Override
