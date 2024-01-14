@@ -3,6 +3,7 @@ package com.giaodoan.fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.giaodoan.adapter.SearchAdapter;
 import com.giaodoan.databinding.FragmentHomeBinding;
 import com.giaodoan.model.Item;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -35,6 +37,9 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
     private ItemsShowAdapter itemAdapter;
     private ItemsPopularAdapter itemAdapter2;
 
+    private boolean firstInit;
+
+    private FirebaseAuth auth;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,14 +49,17 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        firstInit = true;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        auth = FirebaseAuth.getInstance();
         BottomNavigationView bottomNavigation = requireActivity().findViewById(R.id.bottom_navigationView);
+        setbottomNav(bottomNavigation);
         bottomNavigation.setVisibility(View.VISIBLE);
 
         itemList = new ArrayList<>();
@@ -121,5 +129,17 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
         Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailItemFragment2, bundle);
     }
 
+    public void setbottomNav(BottomNavigationView bottomNavigation) {
+        if(auth.getCurrentUser().getUid().equals("AxfHEH4fZcRVwffjwInq6VBSaBh1") && firstInit) {
+            Menu menu = bottomNavigation.getMenu();
+            menu.removeItem(R.id.orderFragment);
+            menu.removeItem(R.id.profileFragment);
+            menu.add(0,R.id.orderAdminFragment,Menu.NONE,"Đơn hàng").setIcon(R.drawable.ic_order);
+            menu.add(0,R.id.profileFragment,Menu.NONE,"Profile").setIcon(R.drawable.ic_baseline_account_circle_24);
+            Log.d("HomeFragment123", "dcmm");
+            firstInit = false;
+        }
+        Log.d("HomeFragment123", auth.getCurrentUser().getUid());
 
+    }
 }
