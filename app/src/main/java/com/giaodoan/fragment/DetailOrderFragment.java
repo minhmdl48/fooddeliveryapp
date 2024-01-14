@@ -87,6 +87,7 @@ public class DetailOrderFragment extends Fragment {
                         Log.d("DetailOrderFragment", "time: "+orderTime);
                         binding.orderTvTime.setText("Thời gian đặt hàng: "+orderTime);
                         binding.tvTotal.setText("Tổng tiền: "+"đ"+totalPrice);
+
                     }
                 })
                 .addOnFailureListener(e -> Toast.makeText(requireContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());

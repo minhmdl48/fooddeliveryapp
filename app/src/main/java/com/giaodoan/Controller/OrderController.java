@@ -46,7 +46,7 @@ import java.util.Objects;
 
 public class OrderController extends Fragment {
 
-    private DetailItemFragmentBinding binding;
+
     private CollectionReference collectionReference;
     private DatabaseReference cartDatabase;
 
@@ -81,8 +81,8 @@ public class OrderController extends Fragment {
         Order order = new Order(
                 uid,
                 "orderId", // orderId để phân biệt các đơn hàng ( Primary Key)
-                //1: Mới tạo
-                //2: Admin đã chấp nhận -> đơn đc chấp nhận
+                //1: Mới tạo - Đang chờ xử lý
+                //2: Admin đã chấp nhận -> Đơn đã được nhận
                 //3: Hủy
                 //4: Hoàn thành
                 "1", //Trạng thái của đơn hàng

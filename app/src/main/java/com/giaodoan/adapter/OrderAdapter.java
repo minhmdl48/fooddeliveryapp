@@ -2,7 +2,6 @@ package com.giaodoan.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -59,7 +58,20 @@ public class OrderAdapter  extends RecyclerView.Adapter<OrderAdapter.ViewHolder>
             holder.binding.orderTitle.setText(context.getString(R.string.order_title)+"  " + currentItem.getOid());
             holder.binding.orderTime.setText(R.string.order_time);
             holder.binding.orderTvTime.setText(currentItem.getOrdertime());
-            holder.binding.orderStatus.setText("Trạng thái : " + currentItem.getStatus());
+            int status=Integer.parseInt(currentItem.getStatus());
+            if (status==1){
+                holder.binding.orderStatus.setText("Trạng thái: "+"Đang chờ xử lý đơn");
+            }
+            else if (status==2){
+                holder.binding.orderStatus.setText("Trạng thái: "+"Đã chấp nhận");
+            }
+            else if (status==3){
+                holder.binding.orderStatus.setText("Trạng thái: "+"Đã hủy");
+            }
+            else if (status==4){
+                holder.binding.orderStatus.setText("Trạng thái: "+"Đã hoàn thành");
+            }
+
 
             String totalPriceText = context.getString(R.string.item_price, currentItem.getPrice());
             holder.binding.orderTvTotalPrice.setText(totalPriceText);
