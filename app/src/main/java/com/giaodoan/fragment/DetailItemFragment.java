@@ -148,7 +148,7 @@ public class DetailItemFragment extends Fragment {
         cartDatabase.child(currentUID).child(orderedProduct.getPid()).updateChildren(product)
                 .addOnSuccessListener(aVoid ->{
                     Log.d("DetailItemFragment","addDataToCartDatabase: "+product);
-                    Toast.makeText(requireContext(), "Thành công thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+
                 })
                 .addOnFailureListener(e -> Toast.makeText(requireContext(), Objects.requireNonNull(e.getMessage()), Toast.LENGTH_SHORT).show());
         cartDatabase.child(currentUID).child(orderedProduct.getPid()).setValue(product)

@@ -32,8 +32,6 @@ public class DetailOrderAdapter extends RecyclerView.Adapter<com.giaodoan.adapte
         }
     }
 
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,8 +46,6 @@ public class DetailOrderAdapter extends RecyclerView.Adapter<com.giaodoan.adapte
         Log.d("DetailOrderAdapter", "onBindViewHolder: "+currentItem.getName());
         holder.binding.orderItemQuantity.setText("x"+String.valueOf(currentItem.getQuantity()));
         holder.binding.orderItemPrice.setText(context.getString(R.string.item_price, currentItem.getPrice()));
-
-
     }
 
     @Override

@@ -63,7 +63,8 @@ public class CheckoutFragment extends Fragment {
         adapter = new TitleOnlyAdapter(getContext(), cartList);
         binding.rvTitle.setAdapter(adapter);
         binding.rvTitle.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        binding.checkoutBackButton.setOnClickListener(v -> Navigation.findNavController(requireView())
+                .navigate(R.id.action_checkoutFragment_to_cartFragment));
         retrieveCartItems();
         Log.d("CheckoutFragment", "onViewCreated: " + totalPrice);
 
@@ -106,11 +107,11 @@ public class CheckoutFragment extends Fragment {
 
                 // Add the order to the database
                 orderDatabaseReference.document(oid).set(order)
-                        .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show())
+                        .addOnSuccessListener(aVoid -> Log.d("CheckoutFragment", "Order placed successfully"))
                         .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to place order", Toast.LENGTH_SHORT).show());
                 //set item ordered to database
                 itemorderedDatabase.child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).child(oid).setValue(cartList)
-                        .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show())
+                        .addOnSuccessListener(aVoid -> Log.d("CheckoutFragment", "Order placed successfully"))
                         .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to place order", Toast.LENGTH_SHORT).show());
 
                 deleteCart(); //delete cart in carts database after checkout

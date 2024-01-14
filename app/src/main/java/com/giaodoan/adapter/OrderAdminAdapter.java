@@ -27,7 +27,6 @@ import java.util.Objects;
 public class OrderAdminAdapter  extends RecyclerView.Adapter<OrderAdminAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Order> list;
-
     private CollectionReference orderRef;
 
     public OrderAdminAdapter(Context context, ArrayList<Order> list) {

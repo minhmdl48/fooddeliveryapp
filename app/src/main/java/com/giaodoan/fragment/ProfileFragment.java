@@ -28,7 +28,6 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth auth;
     private User userz;
 
-
     private final CollectionReference userDatabaseReference = FirebaseFirestore.getInstance().collection("users");
 
     @Nullable

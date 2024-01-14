@@ -17,12 +17,23 @@
         android:textColor="@color/black"
         android:textSize="30sp" />
 
+    <TextView
+        android:id="@+id/delete_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:fontFamily="@font/nbold"
+        android:gravity="end"
+        android:text="Xóa giỏ hàng"
+        android:textColor="#FF0000"
+        android:textSize="20sp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_carts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginBottom="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

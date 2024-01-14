@@ -61,7 +61,15 @@ public class CartFragment extends Fragment implements CartAdapter.OnLongClickRem
         adapter = new CartAdapter(requireContext(), cartList, this,this);
         binding.rvCarts.setAdapter(adapter);
         binding.rvCarts.setLayoutManager(layoutManager);
+        binding.deleteCart.setOnClickListener(v -> cartDatabase.child(Objects.requireNonNull(auth.getCurrentUser()).getUid())
+                .removeValue()
+                .addOnSuccessListener(aVoid -> {
+                    cartList.clear();
+                    binding.tvTotalPrice.setText("đ0");
+                    adapter.notifyDataSetChanged();
 
+                })
+                .addOnFailureListener(e -> Toast.makeText(getContext(), "Xóa thất bại", Toast.LENGTH_SHORT).show()));
         binding.cartCheckout.setOnClickListener(v -> {
             if (auth.getCurrentUser() != null) {
                 if (cartList.isEmpty()) {
@@ -119,7 +127,15 @@ public class CartFragment extends Fragment implements CartAdapter.OnLongClickRem
                 .addOnSuccessListener(aVoid -> {
                     cartList.remove(position);
                     adapter.notifyItemRemoved(position);
-                    Toast.makeText(getContext(), "Xóa thành công ", Toast.LENGTH_SHORT).show();
+
+                    // Recalculate total price after removing an item
+                    totalPrice = 0;
+                    for (ItemOrder itemOrder : cartList) {
+                        totalPrice += Integer.parseInt(itemOrder.getPrice());
+                    }
+
+                    // Update the total price TextView
+                    binding.tvTotalPrice.setText("đ"+ totalPrice);
                 })
                 .addOnFailureListener(e -> Toast.makeText(getContext(), "Xóa thất bại", Toast.LENGTH_SHORT).show());
     }
