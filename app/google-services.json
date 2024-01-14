@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "220009229479",
+    "project_id": "acofee-order",
+    "storage_bucket": "acofee-order.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220009229479:android:a2a4fdecc6ae0acc79bf82",
+        "android_client_info": {
+          "package_name": "com.giaodoan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXJFzUNfWINNiOsI5E-lv6d0UpdtPZ6uI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

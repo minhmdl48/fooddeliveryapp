@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/order_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/nmedium"
+            android:text="Cà phê sữa đá"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/order_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nmedium"
+            android:text="đ29000"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+        <TextView
+            android:id="@+id/order_item_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nmedium"
+            android:text="Số lượng: 1"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:paddingStart="20sp"/>
+    </LinearLayout>
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

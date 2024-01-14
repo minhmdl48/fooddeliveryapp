@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/starbucks_green"
+    tools:context=".fragment.ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <View
+        android:id="@+id/detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="125dp"
+        android:layout_marginBottom="-20dp"
+        android:background="@drawable/roundstyle30dp"
+        android:backgroundTint="#FBFBFB" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_profileimg"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/avatar_icon"
+        />
+
+    <TextView
+        android:id="@+id/profile_fullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_profileimg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nbold"
+        android:text="Minh"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <TextView
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/profile_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_fullname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="minh@gmail.com"
+        android:textColor="#7C7C7C"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/profile_editProfile"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@id/garis_atas"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="@color/white" />
+
+    <ImageView
+        android:id="@+id/helm"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/garis_atas"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="@color/bg_send"
+        android:scaleType="center"
+        android:src="@drawable/ic_baseline_account_blue" />
+
+    <TextView
+        android:id="@+id/tv_editProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/garis_atas"
+        android:layout_marginLeft="-10dp"
+        android:layout_marginTop="34dp"
+        android:layout_toRightOf="@+id/helm"
+        android:fontFamily="@font/nbold"
+        android:text="Edit Profile"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/garis_atas"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_editProfile">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl1">
+
+        <View
+            android:id="@+id/profile_question"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/roundstyle"
+            android:backgroundTint="@color/white" />
+
+        <ImageView
+            android:id="@+id/helm3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/roundstyle"
+            android:backgroundTint="#F1EDFC"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_question_mark" />
+
+        <TextView
+            android:id="@+id/tv_editProfile3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="34dp"
+            android:layout_toEndOf="@+id/helm3"
+            android:fontFamily="@font/nbold"
+            android:text="Các câu hỏi thường gặp "
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="40dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl2">
+
+        <View
+            android:id="@+id/profile_logout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/roundstyle"
+            android:backgroundTint="@color/white" />
+
+        <ImageView
+            android:id="@+id/helm4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/roundstyle"
+            android:backgroundTint="@color/bg_send"
+            android:scaleType="center"
+            android:src="@drawable/logout_24px" />
+
+        <TextView
+            android:fontFamily="@font/nbold"
+            android:id="@+id/tv_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="34dp"
+            android:layout_toEndOf="@+id/helm4"
+            android:text="Đăng xuất"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/garis_atas"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/profile_email"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/underline" />
+
+
+
+</RelativeLayout>

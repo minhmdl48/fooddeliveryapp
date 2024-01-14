@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/cart_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/cafesuada"/>
+
+        <LinearLayout
+            android:layout_width="247dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="right|center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cart_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nmedium"
+                android:text="Cà phê sữa đá"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/cart_item_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nmedium"
+                android:text="đ29000"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/add_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginStart="40sp"
+                    android:layout_marginTop="4sp"
+                    android:background="@drawable/roundstyle"
+
+                    android:scaleType="center"
+                    android:src="@drawable/add" />
+
+                <TextView
+                    android:id="@+id/cart_item_quantity"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginStart="5sp"
+
+                    android:text="1"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="center"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/remove_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="4sp"
+                    android:scaleType="center"
+                    android:src="@drawable/remove" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="15dp">
+
+        <ImageView
+            android:id="@+id/search_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/cafesuada" />
+
+        <TextView
+            android:fontFamily="@font/nmedium"
+            android:layout_toEndOf="@id/search_image"
+            android:id="@+id/search_judul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cà phê sữa đá"
+            android:textSize="22sp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:src="@color/underline"/>
+
+
+
+
+</androidx.cardview.widget.CardView>

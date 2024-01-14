@@ -3,4 +3,11 @@
     <string name="login_no_account">
         Chưa có tài khoản? <font color="#000057"><b>Đăng ký ngay</b></font>
     </string>
+    <string name="login_title">Đăng nhập</string>
+    <string name="currency_symbol">đ</string>
+    <string name="item_price">đ %1$s</string>
+    <string name="order_title">Đơn hàng </string>
+    <string name="order_admin_title">Đơn hàng admin</string>
+    <string name="order_time">Thời gian đặt hàng </string>
+
 </resources>

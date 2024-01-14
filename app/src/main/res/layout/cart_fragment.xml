@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBFBFB"
+    android:orientation="vertical"
+    tools:context=".fragment.CartFragment">
+
+    <TextView
+        android:id="@+id/tv_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:fontFamily="@font/nbold"
+        android:gravity="center"
+        android:text="Giỏ hàng"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/delete_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:fontFamily="@font/nbold"
+        android:gravity="end"
+        android:text="Xóa giỏ hàng"
+        android:textColor="#FF0000"
+        android:textSize="20sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_carts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:fontFamily="@font/nmedium"
+            android:id="@+id/tv_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAlignment="textEnd"
+            android:text="Tổng cộng" />
+
+        <TextView
+            android:fontFamily="@font/nmedium"
+            android:id="@+id/tv_total_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="đ10000"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/nmedium"
+        android:id="@+id/cart_checkout"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20sp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="@color/starbucks_green"
+        android:text="Thanh toán"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+</LinearLayout>
