@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment implements SearchAdapter.ProductOnCli
     }
 
     public void setbottomNav(BottomNavigationView bottomNavigation) {
-        if(auth.getCurrentUser().getUid().equals("iouCxrzEPlea8hr2FYduSokzRbH3") && firstInit) {
+        if(auth.getCurrentUser().getUid().equals("AxfHEH4fZcRVwffjwInq6VBSaBh1") && firstInit) {
             Menu menu = bottomNavigation.getMenu();
             menu.removeItem(R.id.orderFragment);
             menu.removeItem(R.id.profileFragment);

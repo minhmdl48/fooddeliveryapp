@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 import static java.lang.Double.parseDouble;
 import static java.lang.Float.parseFloat;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -159,23 +160,30 @@ public class OrderController extends Fragment {
     }
 
     //admin chấp nhận đơn
-    public void AdminAcceptOrder(String oid){
-        this.orderDatabaseReference.document(oid).update("status", 2).addOnSuccessListener(aVoid ->{
+    public void AdminAcceptOrder(String oid, Context context, CollectionReference orderDatabaseReference){
+        orderDatabaseReference.document(oid).update("status", "2").addOnSuccessListener(aVoid ->{
                     Log.d("AcceptOrder","AcceptOrder: "+oid);
-                    Toast.makeText(requireContext(), "Xác nhận đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Xác nhận đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> Toast.makeText(requireContext(), Objects.requireNonNull(e.getMessage()), Toast.LENGTH_SHORT).show());;
     }
 
     //admin hoàn thành đơn
-    public void AdminFinishOrder(String oid){
-        this.orderDatabaseReference.document(oid).update("status", 4).addOnSuccessListener(aVoid ->{
+    public void AdminFinishOrder(String oid,Context context, CollectionReference orderDatabaseReference){
+        orderDatabaseReference.document(oid).update("status", "4").addOnSuccessListener(aVoid ->{
                     Log.d("FinishOrder","FinishOrder: "+oid);
-                    Toast.makeText(requireContext(), "Hoàn thành đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Hoàn thành đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> Toast.makeText(requireContext(), Objects.requireNonNull(e.getMessage()), Toast.LENGTH_SHORT).show());;
     }
-
+    //admin huy
+    public void AdminCancelOrder(String oid,Context context, CollectionReference orderDatabaseReference){
+        orderDatabaseReference.document(oid).update("status", "3").addOnSuccessListener(aVoid ->{
+                    Log.d("CancelOrder","CancelOrder: "+oid);
+                    Toast.makeText(context, "Hủy đơn hàng" + oid + "thành công", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> Toast.makeText(requireContext(), Objects.requireNonNull(e.getMessage()), Toast.LENGTH_SHORT).show());;
+    }
     //Thanh toán
 }
 

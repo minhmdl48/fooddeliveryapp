@@ -78,7 +78,7 @@ public class OrderAdminFragment  extends Fragment {
                         Order order = item.toObject(Order.class);
 
                         orderList.add(order);
-                        Log.d("OrderAdminFragment" , String.valueOf(orderList.size()));
+                        Log.d("OrderAdminFragment" , String.valueOf(order.getPrice()));
                         adapter.notifyDataSetChanged();
                     }
                 })

@@ -70,7 +70,7 @@
         android:layout_marginEnd="38dp"
         android:layout_toRightOf="@id/order_total_price_admin"
         android:gravity="right"
-        android:text="đ100000"
+        android:text="100000đ"
         android:textColor="@color/black" />
 
     <TextView
@@ -141,7 +141,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/order_status_admin"
+        android:layout_below="@+id/admin_accept"
         android:layout_marginTop="20dp"
         android:background="@color/underline" />
 
